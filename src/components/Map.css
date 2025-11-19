@@ -1,0 +1,116 @@
+.map-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+  align-items: center;
+  padding: 1rem 1.6rem 0 1.6rem;
+  gap: 20px;
+  animation: fadeIn 1.2s ease;
+}
+
+.map-header {
+  text-align: center;
+  line-height: 1.4;
+}
+
+
+.map-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 62%);
+  transition: all 0.2s;
+  margin-bottom: 50px;
+}
+
+.map-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.885);
+}
+
+.leaflet-map {
+  height: 68.6vh;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s;
+  opacity: 0.8;
+}
+
+.leaflet-map:hover {
+  opacity: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  color: #1b4332;
+  font-size: 0.7rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup-content-wrapper a{
+  text-decoration: none;
+  color: #235c38;
+}
+
+.leaflet-marker-icon:hover {
+  filter: drop-shadow(0 0 10px #4ade80);
+  transform: scale(1.08);
+  transition: all 0.3s ease;
+}
+
+.loading-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+  font-size: 1.2rem;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 128, 0, 0.1);
+  border-top: 4px solid #2ecc71;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+/* Dark-Theme */
+.dark .map-header {
+  color: #86efac;
+  text-shadow: 0 0 6px rgba(134, 239, 172, 0.3);
+}
+
+.dark .map-wrapper:hover{
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.dark .loading-msg {
+  color: white;
+}
+
+/* Animation-Responsive */
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

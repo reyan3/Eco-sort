@@ -1,0 +1,152 @@
+.no-contri-page {
+  min-height: 100vh;
+  animation: fadeIn 1.2s ease;
+}
+
+.header-txt-contri {
+  text-align: center;
+  margin: 40px 0;
+  line-height: 1.4;
+  padding: 10px;
+}
+
+.ecocont-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  padding: 30px 20px;
+  padding-top: 0;
+  max-width: 1280px;
+  margin: 123px auto;
+  margin-top: 0;
+}
+
+.ecocont-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+  border: 1px solid #e0f2e0;
+}
+
+.ecocont-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 40px rgba(76, 175, 80, 0.35);
+}
+
+.ecocont-text-content {
+  padding: 24px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #444444;
+  font-weight: 500;
+  flex-grow: 1;
+  border-left: 6px solid #4caf50;
+  padding-left: 20px;
+  margin-left: -1px;
+}
+
+.ecocont-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top: 1px solid #e0e0e0;
+}
+
+.No-contri {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  margin: 8rem auto;
+  padding: 50px 30px;
+  background-color: #ffffff;
+  border: 1px solid #c9e4c9;
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(27, 85, 27, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.No-contri:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.No-contri_icon {
+  width: 120px;
+  height: auto;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.No-contri_message {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #387638;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.No-contri_btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+.No-contri_btn:hover {
+  background-color: #388e3c;
+  transform: translateY(-1px);
+}
+
+/* DARK // RESPONSIVE */
+
+.dark .header-txt-contri {
+  color: #86efac;
+  text-shadow: 0 0 6px rgba(134, 239, 172, 0.3);
+}
+
+.dark .ecocont-card {
+  opacity: 0.7;
+}
+
+.dark .ecocont-card:hover {
+  opacity: 1;
+}
+
+@media (max-width: 460px) {
+  .ecocont-grid-container {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .ecocont-card {
+    border-radius: 12px;
+  }
+
+  .ecocont-image {
+    height: 200px;
+  }
+
+  .ecocont-text-content {
+    font-size: 1rem;
+    padding: 30px;
+    padding-left: 18px;
+  }
+  .No-contri {
+    margin: 8rem 1rem;
+  }
+}
