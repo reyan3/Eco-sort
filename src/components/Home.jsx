@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
-const API_KEY = import.meta.env.VITE_API;
+const API_KEY = import.meta.env.REACT_APP_GEMINI_API_KEY;
 
 const Home = ({ Onsave }) => {
   const [image, setImage] = useState(null);
