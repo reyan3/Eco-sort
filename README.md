@@ -9,10 +9,10 @@
 
 
 <img width="700" height="700" alt="Screenshot 2025-11-20 191652" src="https://github.com/user-attachments/assets/adf9469a-bae0-4abf-89ef-85d120564114" />
-<img width="1919" height="910" alt="Screenshot 2025-11-20 191639" src="https://github.com/user-attachments/assets/92fbbb87-6d6a-4548-8c27-88b5d4d2a52b" />
-<img width="1866" height="887" alt="Screenshot 2025-11-20 191706" src="https://github.com/user-attachments/assets/090bb663-b6e1-49f2-b08d-cc0a6e38d6c0" />
-<img width="1877" height="911" alt="Screenshot 2025-11-20 191730" src="https://github.com/user-attachments/assets/1c91ebc8-7bec-44af-83cd-744a7f3c6dfa" />
-<img width="1884" height="883" alt="Screenshot 2025-11-20 191719" src="https://github.com/user-attachments/assets/a66ec97f-9d5b-4f15-90ca-a5e90e249a92" />
+<img width="700" height="700" alt="Screenshot 2025-11-20 191639" src="https://github.com/user-attachments/assets/92fbbb87-6d6a-4548-8c27-88b5d4d2a52b" />
+<img width="700" height="700" alt="Screenshot 2025-11-20 191706" src="https://github.com/user-attachments/assets/090bb663-b6e1-49f2-b08d-cc0a6e38d6c0" />
+<img width="700" height="700" alt="Screenshot 2025-11-20 191730" src="https://github.com/user-attachments/assets/1c91ebc8-7bec-44af-83cd-744a7f3c6dfa" />
+<img width="700" height="700" alt="Screenshot 2025-11-20 191719" src="https://github.com/user-attachments/assets/a66ec97f-9d5b-4f15-90ca-a5e90e249a92" />
 
 ---
 
@@ -158,8 +158,6 @@ The Eco-Sort project incorporates third-party software, APIs, and assets. All ri
 * **OpenStreetMap tiles / other map tiles** — If using OSM or third-party map tiles, respect the tile provider's terms & attribution requirements.
 * Any other third-party libraries, icons, fonts or assets used are the property of their respective authors and are used according to their licenses. Please see `package.json` and the libraries' repositories for precise license texts.
 
-If you include third-party artwork, photographs, or licensed models, add their exact copyright lines here.
-
 ---
 
 ## License
@@ -173,11 +171,7 @@ Copyright (c) 2025 Eco-Sort
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 ... (standard MIT license text) ...
-```
 
-*Replace **`Reyan Hussain`** with the repository owner's name if different. If you prefer another license, update this section accordingly.*
-
----
 
 ## Troubleshooting
 
@@ -192,5 +186,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy
 For issues or feature requests, open an issue on GitHub or contact the maintainer.
 
 ---
-
-**Replace placeholders** (live URL, API keys, maintainer name, license year) before publishing the README.
