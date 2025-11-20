@@ -186,3 +186,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy
 For issues or feature requests, open an issue on GitHub or contact the maintainer.
 
 ---
+
+```
