@@ -31,7 +31,7 @@
 
 ## Live website
 
-**URL:** `https://ecosortnew.netlify.app/`
+**URL:** https://ecosortnew.netlify.app/
 
 ---
 
