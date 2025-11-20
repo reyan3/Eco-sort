@@ -172,6 +172,7 @@ Copyright (c) 2025 Eco-Sort
 Permission is hereby granted, free of charge, to any person obtaining a copy
 ... (standard MIT license text) ...
 
+```
 
 ## Troubleshooting
 
@@ -187,4 +188,4 @@ For issues or feature requests, open an issue on GitHub or contact the maintaine
 
 ---
 
-```
+
