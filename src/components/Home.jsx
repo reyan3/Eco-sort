@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
+const MODEL_NAME = "gemini-3-flash-preview";
 const API_KEY = import.meta.env.VITE_API;
 
 const Home = ({ Onsave }) => {
@@ -65,7 +65,6 @@ const Home = ({ Onsave }) => {
     reader.onloadend = async () => {
       const base64Image = reader.result.split(",")[1];
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
-
 
       // For Adequate Use Of Api Extract Previous Stored Garbages
       const cachedResult = localStorage.getItem(base64Image);
@@ -138,11 +137,12 @@ Disposal Guide :
           data.candidates?.[0]?.content?.parts?.[0]?.text ||
           "Sorry, the model could not analyze this image.";
 
-        // base64Image Acts as key for for finding similar img and then store "text" in it  
+        // base64Image Acts as key for finding similar img and then store "text" in it
         localStorage.setItem(base64Image, text);
 
         setResult(text);
-        Onsave(text, image);
+
+        if(Onsave) Onsave(text,image)
       } catch (err) {
         console.error("Gemini API Error:", err);
         setError("Failed to connect to the AI service. Please try again.");
@@ -161,13 +161,14 @@ Disposal Guide :
         </div>
       )}
       {error && <div className="error">{error}</div>}
-      <div
-        className="realdiv"
-      >
+      <div className="realdiv">
         <div className="GarbageCard">
           <div className="headings">
             <h2>Your Green Impact Starts Here: Verify Recyclables</h2>
-            <h4>Note : Please use high-resolution photos. This guarantees efficient analysis and prevents wasteful usage of API tokens.</h4>
+            <h4>
+              Note : Please use high-resolution photos. This guarantees
+              efficient analysis and prevents wasteful usage of API tokens.
+            </h4>
           </div>
 
           <input

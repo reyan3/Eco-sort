@@ -19,10 +19,12 @@ const Navbar = ({ authdetails }) => {
   return (
     <>
       <div className="navbar-container">
-        <div className="logo">
-          <img src="/logo3.png" alt="Logo" className="logo-img" />
-          <span>Eco-Sort</span>
-        </div>
+        
+          <div className="logo">
+            <Link to="/"> <img src="/logo3.png" alt="Logo" className="logo-img" /> </Link>
+            <span>Eco-Sort</span>
+          </div>
+       
         <div className="desktop-links">
           <ul className="navbar-ul">
             <li>

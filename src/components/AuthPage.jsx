@@ -1,6 +1,13 @@
 import { useState } from "react";
 import "./auth.css";
 import { FaEye } from "react-icons/fa";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../Firebase.js";
 import { IoMdEyeOff } from "react-icons/io";
 
 const AuthPage = ({ onLogin }) => {
@@ -8,43 +15,93 @@ const AuthPage = ({ onLogin }) => {
   const [message, setMessage] = useState("");
   const [Showpass, setShowpass] = useState(false);
 
-  const handleSubmit = (e) => {
+  // Login and Registration
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage(""); // Clear previous messages
 
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value.trim();
-    const name = isLogin ? null : e.target.name?.value.trim();
-    const avatar = `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${name}`;
+    // Use optional chaining (?.) to avoid the crash
+    const email = e.target.email?.value?.trim();
+    const password = e.target.password?.value?.trim();
+    const name = !isLogin ? e.target.name?.value?.trim() : null;
 
-    // GET stored users
-    let users = JSON.parse(localStorage.getItem("ecosort_users")) || [];
+    try {
+      if (isLogin) {
+        // --- LOGIN LOGIC ---
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const user = userCredential.user;
 
-    if (isLogin) {
-      // LOGIN
-      const user = users.find(
-        (u) => u.email === email && u.password === password
-      );
+        const loggedInUser = {
+          uid: user.uid,
+          email: user.email,
+          name: user.displayName || "User",
+          avatar:
+            user.photoURL ||
+            `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user.email}`,
+        };
 
-      if (!user) {
-        return setMessage("Incorrect email or password.");
+        alert("Login successful!");
+        onLogin && onLogin(loggedInUser);
+      } else {
+        // --- REGISTER LOGIC ---
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+
+        // Add Name and Avatar to the Firebase profile
+        await updateProfile(userCredential.user, {
+          displayName: name,
+          photoURL: `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${name}`,
+        });
+
+        // Fix: Create a clean object with the NEW data to pass to App.js
+        const updatedUser = {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+          name: name, // use the 'name' variable from your form
+          avatar: `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${name}`,
+        };
+
+        alert("Registration successful!");
+        // Firebase automatically logs them in after registration
+        onLogin && onLogin(updatedUser);
       }
+    } catch (error) {
+      // Map Firebase error codes to user-friendly messages
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        setMessage("Invalid email or password.");
+      } else if (error.code === "auth/email-already-in-use") {
+        setMessage("This email is already registered.");
+      } else {
+        setMessage(error.message);
+      }
+    }
+  };
 
-      // Save session
-      localStorage.setItem("ecosort_loggedin", JSON.stringify(user));
-      alert("Login successful!");
-      onLogin && onLogin(user);
-    } else {
-      // REGISTER
-      const exists = users.find((u) => u.email === email);
-      if (exists) return setMessage("Email already registered.");
+  //Forgot Password
+  const handleForgotPassword = async () => {
+    const email = prompt("Please enter your email address:");
 
-      const newUser = { avatar, name, email, password };
-      users.push(newUser);
+    if (!email) return; // User cancelled the prompt
 
-      // Save updated list
-      localStorage.setItem("ecosort_users", JSON.stringify(users));
-      alert("Registration successful! You can now login.");
-      setIsLogin(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset link sent to your email!");
+    } catch (error) {
+      if (error.code === "auth/user-not-found") {
+        setMessage("No account found with this email.");
+      } else {
+        setMessage("Error sending reset email. Try again later.");
+      }
     }
   };
 
@@ -93,17 +150,35 @@ const AuthPage = ({ onLogin }) => {
               className="auth-input"
               required
             />
-            <button className="eye-btn" type="button" onClick={() => {setShowpass(!Showpass)}}>
-              {Showpass ? <IoMdEyeOff /> :<FaEye />}
+            <button
+              className="eye-btn"
+              type="button"
+              onClick={() => {
+                setShowpass(!Showpass);
+              }}
+            >
+              {Showpass ? <IoMdEyeOff /> : <FaEye />}
             </button>
           </div>
+
+          {/* Forgot Password Link (Only show during Login mode) */}
+          {isLogin && (
+            <p className="forgot-link" onClick={handleForgotPassword}>
+              Forgot Password?
+            </p>
+          )}
 
           <button className="auth-btn">{isLogin ? "Login" : "Register"}</button>
         </form>
 
         <p className="toggle-text">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <span onClick={() => setIsLogin(!isLogin)}>
+          <span
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setMessage(""); // Clear errors when switching modes}
+            }}
+          >
             {isLogin ? "Register" : "Login"}
           </span>
         </p>

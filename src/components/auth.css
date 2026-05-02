@@ -134,6 +134,21 @@
   animation: fadeauth 0.3s ease;
 }
 
+.forgot-link {
+  text-align: center;
+  font-size: 0.85rem;
+  color: white; /* Using an eco-friendly green to match your leaf logo */
+  cursor: pointer;
+  margin-top: -7px;
+  margin-bottom: 15px;
+  transition: opacity 0.2s;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
 @keyframes fadeauth{
   from {
     opacity: 0;
