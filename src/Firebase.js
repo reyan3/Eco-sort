@@ -7,9 +7,9 @@ import { getFirestore } from "firebase/firestore"; // 1. Import Firestore
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebase_api = import.meta.env.FIREBASE_API
+const FIREAPI = import.meta.env.FIRE_API
 const firebaseConfig = {
-  apiKey: firebase_api,
+  apiKey: FIREAPI,
   authDomain: "ecosort-1e92b.firebaseapp.com",
   projectId: "ecosort-1e92b",
   storageBucket: "ecosort-1e92b.firebasestorage.app",
