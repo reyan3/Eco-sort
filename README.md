@@ -56,8 +56,8 @@
 1. **Clone the repo**
 
    ```bash
-   git clone https://github.com/<your-username>/eco-sort.git
-   cd eco-sort
+   git clone https://github.com/reyan3/Eco-sort.git
+   cd Eco-sort
    ```
 
 2. **Install dependencies**
@@ -81,19 +81,19 @@
 
    ```env
    # Gemini API
-   REACT_APP_GEMINI_API_KEY=your_gemini_api_key
+   VITE_APP_GEMINI_API_KEY=your_gemini_api_key
    
    # Firebase Configuration
-   REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-   REACT_APP_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   REACT_APP_FIREBASE_APP_ID=your_app_id
+   VITE_APP_FIREBASE_API_KEY=your_firebase_api_key
+   VITE_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   VITE_APP_FIREBASE_PROJECT_ID=your_project_id
+   VITE_APP_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   VITE_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_APP_FIREBASE_APP_ID=your_app_id
    
    # Map Configuration
-   REACT_APP_MAP_TILE_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-   REACT_APP_MAP_TILE_ATTR="&copy; OpenStreetMap contributors"
+   VITE_APP_MAP_TILE_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+   VITE_APP_MAP_TILE_ATTR="&copy; OpenStreetMap contributors"
    ```
 
    **Important:** Do NOT commit API keys to git. Use environment variables or your hosting secret manager.
@@ -124,12 +124,94 @@
 7. **Build for production**
 
    ```bash
-   npm run build
+   npm run dev
    # or
    yarn build
    ```
 
 ---
+
+```
+## How It Works
+
+Eco-Sort combines image-based waste detection, cloud authentication, and geolocation services to help users identify recyclable waste and locate nearby dumping yards.
+
+### 1. User Authentication
+Users can create an account or log in securely using Firebase Authentication. Authentication enables:
+- Secure login sessions
+- Password reset via email
+- Cloud synchronization of user contributions across devices
+
+### 2. Image Upload / Camera Capture
+Users can:
+- Upload an image from their device
+- Capture an image directly using their camera
+
+The selected image is then processed and sent to the Gemini Vision API for analysis.
+
+### 3. Waste Detection & Classification
+The Gemini API analyzes the uploaded image and predicts:
+- The type of waste item
+- Whether the item is:
+  - ♻️ Recyclable
+  - 🚫 Non-recyclable
+
+The detection result is displayed instantly in the UI.
+
+### 4. Nearby Dumping Yard Detection
+Eco-Sort uses the browser `navigator.geolocation` API to access the user's location (with permission).
+
+Using `react-leaflet` maps, the application:
+- Finds nearby dumping or recycling yards
+- Displays them interactively on a map
+- Helps users dispose of waste responsibly
+
+### 5. Contribution History
+Authenticated users can save their detection history to Firebase Firestore.
+
+Each contribution includes:
+- Detection timestamp
+- Item classification
+- Recyclable/non-recyclable result
+- Image reference
+
+Contribution history is synced automatically across devices.
+
+### 6. Cloud Sync & Migration
+If a user previously stored data locally using `localStorage`, Eco-Sort automatically migrates that data to Firestore upon login.
+
+This ensures:
+- Persistent cloud backups
+- Cross-device access
+- Real-time synchronization
+
+### 7. User Experience Features
+Eco-Sort also includes:
+- Dark mode with persistent preferences
+- Mobile-responsive UI
+- User avatar generation using DiceBear API
+- Accessible and modern interface design
+
+---
+
+### Workflow Overview
+
+```text
+User Uploads Image
+        ↓
+Gemini Vision API Analysis
+        ↓
+Waste Classification Result
+        ↓
+Fetch User Location
+        ↓
+Display Nearby Dumping Yards
+        ↓
+Save Contribution to Firestore
+        ↓
+Sync Across Devices
+
+```
 
 ## Firebase Features
 
@@ -301,7 +383,7 @@ SOFTWARE.
 * **Data not syncing:** Check browser console for Firestore errors and verify internet connection
 
 ### General Issues
-* **Map or tiles not loading:** Check `REACT_APP_MAP_TILE_URL` and confirm no mixed-content issues (HTTP vs HTTPS)
+* **Map or tiles not loading:** Check `VITE_APP_MAP_TILE_URL` and confirm no mixed-content issues (HTTP vs HTTPS)
 * **Detection failing:** Confirm Gemini API key is valid with necessary quotas
 * **Localhost 404 on subpaths:** Add redirect rules (e.g., Netlify `_redirects`: `/* /index.html 200`)
 * **Environment variables not working:** Restart development server after updating `.env`
